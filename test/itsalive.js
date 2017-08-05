@@ -11,3 +11,13 @@ describe('Adding', ()=> {
 	});
 });
 
+describe('SetTimeout', ()=> {
+  it('1000ms', (done)=>{
+    let start = new Date();
+    setTimeout( ()=> {
+      let duration = new Date() - start;
+      expect(duration).to.be.closeTo(1000, 50);
+      done();
+    }, 1000);
+  });
+});
