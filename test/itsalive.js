@@ -1,6 +1,10 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
 
+var chai = require('chai');
+var spies = require('chai-spies');
+chai.use(spies);
+
 const add = (num1, num2)=> {
 	return num1 + num2;
 }
@@ -21,3 +25,17 @@ describe('SetTimeout', ()=> {
     }, 1000);
   });
 });
+
+describe('spies',() => {
+  it('will invoke a function once per element', function () {
+    var arr = ['x','y','z'];
+    function logNth (val, idx) {
+      console.log('Logging elem #'+idx+':', val);
+    }
+    logNth = chai.spy(logNth);
+    arr.forEach(logNth);
+    expect(logNth).to.have.been.called.exactly(arr.length);
+  });
+})
+
+
